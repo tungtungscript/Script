@@ -9295,46 +9295,9 @@ G.Bom2devOutputNotify.Notify = addNotice
 G.Bom2devOutputNotify.cleanup = cleanup
 ]]},
 {Text = {vn = "Robux +inf(Client)", en = "Robux +inf(Client)"}, Script = [==[
-local CoreGui = game:GetService("CoreGui")
-local RS = game:GetService("RunService")
-
-local PRICE = "+inf"
-local FONT = '<font family="rbxasset://LuaPackages/Packages/_Index/BuilderIcons/BuilderIcons/BuilderIcons.json" weight="400">robux</font> '
-
-getgenv()._robuxPriceValue = PRICE
-
-if getgenv()._robuxPriceConn then
-    pcall(function() getgenv()._robuxPriceConn:Disconnect() end)
-    getgenv()._robuxPriceConn = nil
-end
-
-local function applyPrice()
-    local val = getgenv()._robuxPriceValue
-    if not val then return end
-    local ok, txt = pcall(function()
-        return CoreGui.FoundationOverlay.SafeAreaFrame.OverlayPortal.SheetContainer.Frame.Sheet.Content.Header.Content.SubContent.ModalHeader.RightSide.RobuxPrice
-    end)
-    if ok and txt and txt.Parent then
-        pcall(function()
-            txt.Text = FONT .. val
-        end)
-    end
-end
-
-applyPrice()
-
-getgenv()._robuxPriceConn = RS.Heartbeat:Connect(function()
-    if not getgenv()._robuxPriceConn then return end
-    applyPrice()
-end)
-
-pcall(function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "Đã nhận!!",
-        Text = "+inf robux!",
-        Duration = 8
-    })
-end)
+local C=game:GetService("CoreGui")local R=game:GetService("RunService")local S=game:GetService("StarterGui")local F='<font family="rbxasset://LuaPackages/Packages/_Index/BuilderIcons/BuilderIcons/BuilderIcons.json" weight="400">robux</font> '
+if getgenv()._rc then pcall(function() getgenv()._rc:Disconnect() end) end
+getgenv()._rc=R.Heartbeat:Connect(function() pcall(function() local t=C.FoundationOverlay.SafeAreaFrame.OverlayPortal.SheetContainer.Frame.Sheet.Content.Header.Content.SubContent.ModalHeader.RightSide.RobuxPrice if t and t.Parent then t.RichText=true t.Text=F.."+inf" end end) end) pcall(function() S:SetCore("SendNotification",{Title="Đã nhận!!",Text="+inf robux!",Duration=8}) end)
 ]==]},
 }},
 {Text = { vn = "Ngôn Ngữ", en = "Language" }, Scripts = {
